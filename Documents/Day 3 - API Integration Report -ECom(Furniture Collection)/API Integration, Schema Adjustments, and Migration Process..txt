@@ -1,0 +1,23 @@
+Project Report: API Integration, Schema Adjustments, and Migration Process.
+
+1. API Integration Process
+The integration of external APIs into the Next.js application , a promise-based HTTP client. The process involved the following steps:
+
+API Selection & Authentication: Chose the appropriate third-party API based on project requirements. Configured API keys and set up authentication headers.
+Fetching Data: Utilized Axios to fetch data asynchronously from external services within Next.js getServerSideProps or getStaticProps, depending on the use case.
+Error Handling & Caching: Implemented error handling to catch potential issues with API responses, and caching mechanisms were used where appropriate to reduce unnecessary calls.
+2. Adjustments Made to Schemas
+To ensure compatibility between the API data and our application, the following adjustments were made to the database schemas:
+
+New Fields: Added new fields to existing models to store the data received from external APIs. For instance, fields such as api_id, external_source, and status were incorporated into relevant models.
+Relational Changes: Adjusted relationships between entities in the schema to reflect new data structures received from the API (e.g., one-to-many, many-to-many relationships).
+Normalization: Improved data normalization to reduce redundancy and ensure optimal data storage, especially when dealing with large sets of API data.
+3. Migration Steps and Tools Used
+The database migration was carried out with the following process:
+
+Prisma Migrate Tool: Utilized Prisma Migrate for seamless database schema changes. The tool was used to create migration files after modifying the schema to reflect new requirements.
+Migration Steps:
+Defined new models and relationships in the Prisma schema.
+Generated migration files using prisma migrate dev for local development and prisma migrate deploy for production.
+Applied the migrations to the database, ensuring that all tables and relationships were properly updated without data loss.
+Post-Migration Adjustments: After running the migrations, data integrity was checked, and manual adjustments were made to populate the new fields with the appropriate data from APIs.
