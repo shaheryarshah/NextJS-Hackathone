@@ -9,7 +9,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { addToCart } from '../actions/actions'
 import Swal from "sweetalert2"
-import { Product } from "@/types/product"  // ✅ Ensure correct import
+
 
 const Featuredproducts = () => {
   const [products, setProducts] = useState<Product[]>([])
