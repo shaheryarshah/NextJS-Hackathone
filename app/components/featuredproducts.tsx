@@ -8,13 +8,7 @@ import Link from 'next/link'
 import { addToCart } from '../actions/actions'
 import Swal from "sweetalert2"
 
-
-//<section className="py-16 px-4 ">
-//<h2 className="text-3xl font-bold text-center mb-8">Top Categories</h2>
-//</section><div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"></div>
-
-
-
+// Add the key prop for the mapped elements
 
 const Featuredproducts = () => {
   const [product, setProduct] = useState<Product[]>([])
@@ -33,32 +27,24 @@ const Featuredproducts = () => {
     Swal.fire({
       position: "top-right",
       icon: "sucess",
-      title: `${product.name}add to cart`,
+      title: `${product.name} added to cart`,
       showConfirmButton: false,
       timer: 1000
     })
 
     addToCart(product)
-
-
-
   }
 
 
-
-
-
   return (
-
     <div className="py-16 px-4">
-      <div className=" md:px-0 container px-5 mx-auto ">
+      <div className="md:px-0 container px-5 mx-auto">
         <h1 className="text-4xl font-bold text-center text-black mb-12">
           Featured Products
         </h1>
         <div className="w-[1440px] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 ">
           {product.map((product) => (
-
-            <div className="m-[100px]  w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <div key={product._id} className="m-[100px] w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
               <Link href={`/id/${product.slug.current}`}>
                 {product.image && (
                   <Image
@@ -68,8 +54,8 @@ const Featuredproducts = () => {
                     height={300}
                     className="object-cover w-[1000px] h-[350px]"
                   />
-
-                )}</Link>
+                )}
+              </Link>
               <div className="p-4 text-center">
                 <div className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">{product.name}
                   <div className="flex items-center mt-2.5 mb-5">
@@ -133,14 +119,10 @@ const Featuredproducts = () => {
                       onClick={(e) => handleAddToCart(e, product)}>
                       Add To Cart
                     </button>
-
-
-
                   </div>
                 </div>
               </div>
             </div>
-
           ))}
         </div>
       </div>
