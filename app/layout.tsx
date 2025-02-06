@@ -4,11 +4,11 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Footer from "./components/footer";
-import { ClerkProvider } from '@clerk/nextjs';
+import { ClerkProvider, RedirectToSignIn } from '@clerk/nextjs';
 import ReduxProvider from "./components/reduxprovider";
-import { Suspense } from "react";
+import { useEffect, useState } from 'react';
 
-// Ensure the async behavior of ClerkProvider is handled inside Suspense
+// Ensure the async behavior of ClerkProvider is handled
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -21,21 +21,35 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const [isClerkReady, setClerkReady] = useState(false);
+
+  // Use useEffect to ensure ClerkProvider is initialized asynchronously
+  useEffect(() => {
+    const initClerk = async () => {
+      // ClerkProvider may require async operations before rendering
+      setClerkReady(true);
+    };
+
+    initClerk();
+  }, []);
+
+  if (!isClerkReady) {
+    // Show a loading state until Clerk is initialized
+    return <div>Loading...</div>;
+  }
+
   return (
-    // Wrap ClerkProvider inside Suspense to handle async loading
-    <Suspense fallback={<div>Loading...</div>}>
-      <ClerkProvider>
-        <ReduxProvider>
-          <html lang="en">
-            <body>
-              <Header />
-              <Navbar />
-              {children}
-              <Footer />
-            </body>
-          </html>
-        </ReduxProvider>
-      </ClerkProvider>
-    </Suspense>
+    <ClerkProvider>
+      <ReduxProvider>
+        <html lang="en">
+          <body>
+            <Header />
+            <Navbar />
+            {children}
+            <Footer />
+          </body>
+        </html>
+      </ReduxProvider>
+    </ClerkProvider>
   );
 }
