@@ -11,6 +11,7 @@ export interface Product {
   discountPercentage: number;
   isFeaturedProduct: number;
   colors?: string[];
+  stock: number;
   name: string;
   image?: {
     asset: {
