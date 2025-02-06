@@ -6,13 +6,12 @@ import "./globals.css";
 import Footer from "./components/footer";
 import {
   ClerkProvider,
-  SignInButton,
-  SignedIn,
-  SignedOut,
+  RedirectToSignIn,
   UserButton
-} from '@clerk/nextjs'
-import './globals.css'
+} from '@clerk/nextjs';
+import './globals.css';
 import ReduxProvider from "./components/reduxprovider";
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,21 +26,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
-      <ReduxProvider>
-      <html lang="en">
-        <body>
-   
-          <Header/>
-      <Navbar/>
-          {children}
-          <Footer/>
-        </body>
-      </html>
-      </ReduxProvider>
-    </ClerkProvider>
-  )
+    <Suspense fallback={<div>Loading...</div>}>
+      <ClerkProvider>
+        <ReduxProvider>
+          <html lang="en">
+            <body>
+              <Header />
+              <Navbar />
+              {children}
+              <Footer />
+            </body>
+          </html>
+        </ReduxProvider>
+      </ClerkProvider>
+    </Suspense>
+  );
 }
-      
-      
-
