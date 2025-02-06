@@ -102,13 +102,17 @@ export default async function ProductPage({ params }: ProductPageProps) {
           <div className="flex items-center gap-4">
             <p className="text-lg font-medium text-gray-800">Available Colors:</p>
             <div className="flex gap-2">
-              {product.colors?.map((color: string, index: number) => (
-                <span
-                  key={index}
-                  className="h-6 w-6 rounded-full border border-gray-300 shadow-md"
-                  style={{ backgroundColor: color }}
-                />
-              ))}
+    {product.colors?.length ? (
+  product.colors.map((color: string, index: number) => (
+    <span
+      key={index}
+      className="h-6 w-6 rounded-full border border-gray-300 shadow-md"
+      style={{ backgroundColor: color }}
+    />
+  ))
+) : (
+  <p className="text-gray-500">No colors available</p>
+)}
             </div>
           </div>
 
