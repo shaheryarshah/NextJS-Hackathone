@@ -1,4 +1,6 @@
 'use client'
+import { Product } from "@/types/product"; // Adjust based on your actual path
+'use client'
 import { allProducts } from '@/lib/queries'
 import { client } from '@/sanity/lib/client'
 import { urlFor } from '@/sanity/lib/image'
@@ -7,30 +9,39 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { addToCart } from '../actions/actions'
 import Swal from "sweetalert2"
+import { Product } from "@/types/product"  // ✅ Ensure correct import
 
 const Featuredproducts = () => {
-  const [product, setProduct] = useState<Product[]>([])
+  const [products, setProducts] = useState<Product[]>([])
 
   useEffect(() => {
-    async function fetchProduct() {
-      const fetchedProduct: Product[] = await client.fetch(allProducts)
-      setProduct(fetchedProduct)
+    async function fetchProducts() {
+      const fetchedProducts: Product[] = await client.fetch(allProducts);
+
+      // ✅ Ensure `_type` exists in all products
+      const normalizedProducts = fetchedProducts.map(product => ({
+        ...product,
+        _type: product._type || "product",
+      }));
+
+      setProducts(normalizedProducts);
     }
-    fetchProduct()
-  }, [])
+    fetchProducts();
+  }, []);
 
   const handleAddToCart = (e: React.MouseEvent, product: Product) => {
-    e.preventDefault()
+    e.preventDefault();
+    
     Swal.fire({
       position: "top-right",
       icon: "success",
       title: `${product.name} added to cart`,
       showConfirmButton: false,
       timer: 1000
-    })
+    });
 
-    addToCart(product)
-  }
+    addToCart({ ...product, _type: "product" });  // ✅ Ensure `_type` exists
+  };
 
   return (
     <div className="py-16 px-4">
@@ -39,9 +50,9 @@ const Featuredproducts = () => {
           Featured Products
         </h1>
         <div className="w-[1440px] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-          {product.map((product) => (
+          {products.map((product) => (
             <div 
-              key={product.slug.current}  // <-- Added key prop here
+              key={product.slug.current} 
               className="m-[100px] w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
             >
               <Link href={`/id/${product.slug.current}`}>
@@ -108,3 +119,5 @@ const Featuredproducts = () => {
 }
 
 export default Featuredproducts
+
+
