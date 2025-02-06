@@ -1,6 +1,18 @@
-import { ClerkProvider } from '@clerk/nextjs';
+import Header from "./components/header"
+import Navbar from "./components/navbar"
+import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { Metadata } from "next";
+import "./globals.css";
+import Footer from "./components/footer";
+import {
+  ClerkProvider,
+  SignInButton,
+  SignedIn,
+  SignedOut,
+  UserButton
+} from '@clerk/nextjs'
+import './globals.css'
+import ReduxProvider from "./components/reduxprovider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,11 +28,20 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
+      <ReduxProvider>
       <html lang="en">
-        <body className={inter.className}>
+        <body>
+   
+          <Header/>
+      <Navbar/>
           {children}
+          <Footer/>
         </body>
       </html>
+      </ReduxProvider>
     </ClerkProvider>
-  );
+  )
 }
+      
+      
+
