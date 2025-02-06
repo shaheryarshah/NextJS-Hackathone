@@ -10,6 +10,7 @@ export interface Product {
   imagePath?: string; // Made optional
   discountPercentage: number;
   isFeaturedProduct: number;
+  colors?: string[];
   name: string;
   image?: {
     asset: {
