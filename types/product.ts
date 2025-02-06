@@ -3,7 +3,7 @@ import { Slug } from "sanity";
 export interface Product
 { category: string;
     _id: string;
-    _type:"product",
+    _type:string,
     price: number;
     description?: string;
     stockLevel: number;
