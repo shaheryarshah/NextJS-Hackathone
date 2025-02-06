@@ -4,11 +4,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Footer from "./components/footer";
-import {
-  ClerkProvider,
-  RedirectToSignIn,
-  UserButton
-} from '@clerk/nextjs';
+
 import './globals.css';
 import ReduxProvider from "./components/reduxprovider";
 import { Suspense } from "react";
@@ -27,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <ClerkProvider>
+    
         <ReduxProvider>
           <html lang="en">
             <body>
@@ -38,7 +34,7 @@ export default function RootLayout({
             </body>
           </html>
         </ReduxProvider>
-      </ClerkProvider>
+      
     </Suspense>
   );
 }
