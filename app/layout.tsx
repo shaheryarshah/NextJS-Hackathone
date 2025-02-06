@@ -1,3 +1,6 @@
+// Marking this file as a Client Component
+'use client';
+
 import Header from "./components/header";
 import Navbar from "./components/navbar";
 import type { Metadata } from "next";
@@ -8,7 +11,6 @@ import { ClerkProvider, RedirectToSignIn } from '@clerk/nextjs';
 import ReduxProvider from "./components/reduxprovider";
 import { useEffect, useState } from 'react';
 
-// Ensure the async behavior of ClerkProvider is handled
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
