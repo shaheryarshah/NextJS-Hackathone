@@ -23,7 +23,7 @@ export default function RootLayout({
     <ClerkProvider>
       <ReduxProvider>
         <html lang="en">
-          <body>
+          <body className={inter.className}>
             <Header />
             <Navbar />
             {children}
