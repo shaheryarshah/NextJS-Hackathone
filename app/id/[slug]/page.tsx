@@ -7,6 +7,7 @@ import { urlFor } from "@/sanity/lib/image";
 import Swal from "sweetalert2";
 import { allProducts } from "@/lib/queries";
 import { addToCart } from "@/app/actions/actions";
+import { Product } from "@/types/product"; // Ensure correct import
 
 const Featuredproducts = () => {
   const [product, setProduct] = useState<Product[]>([]);
@@ -44,7 +45,7 @@ async function ProductDetails(slug: string): Promise<Product> {
       product,
       image,
       price,
-      type,
+      _type,
       name,
       description,
       colors,
