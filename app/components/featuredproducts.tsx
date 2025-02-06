@@ -1,6 +1,6 @@
 'use client'
 import { Product } from "@/types/product"; // Adjust based on your actual path
-'use client'
+
 import { allProducts } from '@/lib/queries'
 import { client } from '@/sanity/lib/client'
 import { urlFor } from '@/sanity/lib/image'
