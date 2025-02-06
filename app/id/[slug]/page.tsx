@@ -117,15 +117,16 @@ export default async function ProductPage({ params }: ProductPageProps) {
           </div>
 
           {/* Stock Availability */}
-          <p
-            className={`text-lg font-medium ${
-              product.stock > 0 ? "text-green-600" : "text-red-600"
-            }`}
-          >
-            {product.stock > 0
-              ? `In Stock: ${product.stock}`
-              : "Out of Stock"}
-          </p>
+<p
+  className={`text-lg font-medium ${
+    (product.stock ?? 0) > 0 ? "text-green-600" : "text-red-600"
+  }`}
+>
+  {(product.stock ?? 0) > 0
+    ? `In Stock: ${product.stock}`
+    : "Out of Stock"}
+</p>
+
 
           {/* Add to Cart Button */}
           <button
